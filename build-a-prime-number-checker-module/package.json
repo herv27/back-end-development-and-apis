@@ -1,0 +1,11 @@
+
+{
+  "name": "prime-checker",
+  "version": "1.0.0",
+  "description": "A simple CommonJS module for checking prime numbers.",
+  "keywords": ["prime", "number", "checker"],
+  "license": "MIT",
+  "author": "Student",
+  "type": "commonjs",
+  "main": "index.js"
+}

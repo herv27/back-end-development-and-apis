@@ -1,3 +1,4 @@
+
 import express from "express";
 import cors from "cors";
 
@@ -13,9 +14,39 @@ app.get("/", (_req, res) => {
 
 // Do not change code above this line
 
+function getTimestamp(req, res) {
+  const input = req.params.date;
+
+  let date;
+
+  if (!input) {
+    date = new Date();
+  } else if (/^-?\d+$/.test(input)) {
+    date = new Date(Number(input));
+  } else {
+    date = new Date(input);
+  }
+
+  if (isNaN(date.getTime())) {
+    return res.json({ error: "Invalid Date" });
+  }
+
+  return res.json({
+    unix: date.getTime(),
+    utc: date.toUTCString()
+  });
+}
+
+app.get("/api", getTimestamp);
+app.get("/api/:date", getTimestamp);
+
 // Do not change code below this line
 
 const PORT = 8000;
+
 const listener = app.listen(PORT, function () {
-  console.log("Your app is listening on port " + listener.address().port);
+  console.log(
+    "Your app is listening on port " +
+    listener.address().port
+  );
 });
